@@ -1,5 +1,6 @@
 <script setup>
 import { NAV_ITEMS } from '../constants/constants';
+import NavItem from './NavItem.vue';
 
 defineProps(['currentPage']);
 
