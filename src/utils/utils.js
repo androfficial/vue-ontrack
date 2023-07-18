@@ -1,4 +1,4 @@
-import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants/constants';
+import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '../constants/constants';
 
 export const normalizePageHash = () => {
   const hash = window.location.hash.slice(1);
