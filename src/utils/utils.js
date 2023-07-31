@@ -1,4 +1,9 @@
-import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '../constants/constants';
+import {
+  PAGE_TIMELINE,
+  PAGE_ACTIVITIES,
+  PAGE_PROGRESS,
+  HOURS_IN_DAY,
+} from '../constants/constants';
 
 export const normalizePageHash = () => {
   const hash = window.location.hash.slice(1);
@@ -7,3 +12,13 @@ export const normalizePageHash = () => {
   window.location.hash = PAGE_TIMELINE;
   return PAGE_TIMELINE;
 };
+
+export function generateTimelineItems() {
+  const timelineItems = [];
+
+  for (let hour = 0; hour < HOURS_IN_DAY; hour++) {
+    timelineItems.push({ hour });
+  }
+
+  return timelineItems;
+}
