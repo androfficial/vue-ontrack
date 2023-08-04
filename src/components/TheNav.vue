@@ -1,14 +1,13 @@
 <script setup>
 import { NAV_ITEMS } from '../constants/constants';
+import { isPageValid } from '../validators/validators';
 import NavItem from './NavItem.vue';
 
 defineProps({
   currentPage: {
     required: true,
     type: String,
-    validator(currentPage) {
-      return Object.keys(NAV_ITEMS).includes(currentPage);
-    },
+    validator: isPageValid,
   },
 });
 
