@@ -4,6 +4,10 @@ export function isPageValid(page) {
   return Object.keys(NAV_ITEMS).includes(page);
 }
 
+export function isHourValid(hour) {
+  return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY - 1);
+}
+
 export function isTimelineItemValid({ hour }) {
   return isHourValid(hour);
 }
@@ -42,10 +46,6 @@ function isNumber(value) {
 
 function isBetween(value, start, end) {
   return value >= start && value <= end;
-}
-
-function isHourValid(hour) {
-  return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY - 1);
 }
 
 function isSelectOptionValid({ value, label }) {
