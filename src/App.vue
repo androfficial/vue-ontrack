@@ -29,6 +29,9 @@ const currentPage = ref(normalizePageHash());
 const timelineItems = generateTimelineItems();
 const activities = ref(generateActivities());
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
+const setTimelineItemActivity = ({ timelineItem, activity }) => {
+  timelineItem.activityId = activity.id;
+};
 </script>
 
 <template>
@@ -38,7 +41,9 @@ const activitySelectOptions = computed(() => generateActivitySelectOptions(activ
     <TheTimeline
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
+      :activities="activities"
       :activity-select-options="activitySelectOptions"
+      @set-timeline-item-activity="setTimelineItemActivity"
     />
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
