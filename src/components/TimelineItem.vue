@@ -1,5 +1,5 @@
 <script setup>
-import { isActivityValid } from '../validators/validators';
+import { isActivityValid, isNull } from '../validators/validators';
 import { validateActivities } from '../validators/validators';
 import { isTimelineItemValid, validateSelectOptions } from '../validators/validators';
 import BaseSelect from './BaseSelect.vue';
@@ -24,14 +24,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits({
-  selectActivity: isActivityValid,
+  selectActivity(activity) {
+    return isNull(activity) || isActivityValid(activity);
+  },
 });
 
 const selectActivity = (id) => {
-  emit(
-    'selectActivity',
-    props.activities.find((activity) => activity.id === id)
-  );
+  emit('selectActivity', props.activities.find((activity) => activity.id === id) || null);
 };
 </script>
 
