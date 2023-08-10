@@ -52,22 +52,22 @@ export function isNull(value) {
   return value === null;
 }
 
+export function isNumber(value) {
+  return typeof value === 'number';
+}
+
 export function isNumberOrNull(value) {
   return isNumber(value) || isNull(value);
 }
 
-function isSelectOptionValid({ value, label }) {
-  return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label);
-}
-
-function isBetween(value, start, end) {
+export function isBetween(value, start, end) {
   return value >= start && value <= end;
 }
 
-function isNumber(value) {
-  return typeof value === 'number';
+export function isString(value) {
+  return typeof value === 'string';
 }
 
-function isString(value) {
-  return typeof value === 'string';
+export function isSelectOptionValid({ value, label }) {
+  return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label);
 }
