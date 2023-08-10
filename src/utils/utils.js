@@ -1,5 +1,6 @@
 import {
   PAGE_TIMELINE,
+  MILLISECONDS_IN_SECOND,
   HOURS_IN_DAY,
   MIDNIGHT_HOUR,
   SECONDS_IN_HOUR,
@@ -7,6 +8,14 @@ import {
   MINUTES_IN_HOUR,
 } from '../constants/constants';
 import { isNull, isPageValid } from '../validators/validators';
+
+export function formatSeconds(seconds) {
+  const date = new Date();
+  date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND);
+  const utc = date.toUTCString();
+
+  return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6);
+}
 
 export const normalizePageHash = () => {
   const page = window.location.hash.slice(1);
@@ -39,6 +48,7 @@ export function generateTimelineItems() {
     timelineItems.push({
       hour,
       activityId: null,
+      activitySeconds: 0,
     });
   }
 
