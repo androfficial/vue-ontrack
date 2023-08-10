@@ -35,8 +35,8 @@ const currentPage = ref(normalizePageHash());
 const timelineItems = ref(generateTimelineItems());
 const activities = ref(generateActivities());
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
-const setTimelineItemActivity = ({ timelineItem, activity }) => {
-  timelineItem.activityId = activity?.id || null;
+const setTimelineItemActivity = (timelineItem, activity) => {
+  timelineItem.activityId = activity.id;
 };
 const setActivitySecondsToComplete = (activity, secondsToComplete) => {
   activity.secondsToComplete = secondsToComplete;
