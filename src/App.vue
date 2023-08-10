@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './pages/TheTimeline.vue';
@@ -28,7 +28,7 @@ const deleteActivity = (activity) => {
 const currentPage = ref(normalizePageHash());
 const timelineItems = generateTimelineItems();
 const activities = ref(generateActivities());
-const activitySelectOptions = generateActivitySelectOptions(activities.value);
+const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 </script>
 
 <template>
