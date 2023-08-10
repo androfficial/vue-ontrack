@@ -7,7 +7,6 @@ import TheActivities from './pages/TheActivities.vue';
 import TheProgress from './pages/TheProgress.vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants/constants';
 import {
-  id,
   generateTimelineItems,
   normalizePageHash,
   generateActivities,
@@ -18,12 +17,8 @@ const goTo = (page) => {
   currentPage.value = page;
 };
 
-const createActivity = (name) => {
-  activities.value.push({
-    id: id(),
-    name,
-    secondsToComplete: 0,
-  });
+const createActivity = (activity) => {
+  activities.value.push(activity);
 };
 
 const deleteActivity = (activity) => {
