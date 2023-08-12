@@ -41,7 +41,7 @@ const select = (value) => {
     </BaseButton>
     <select
       @change="select($event.target.value)"
-      class="w-full truncate rounded bg-gray-100 py-1 px-2 text-2xl"
+      class="w-full truncate rounded bg-gray-100 px-2 py-1 text-2xl"
     >
       <option :selected="isNotSelected" disabled value="">
         {{ placeholder }}

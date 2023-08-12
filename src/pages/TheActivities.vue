@@ -26,8 +26,8 @@ const setSecondsToComplete = (activity, secondsToComplete) => {
 </script>
 
 <template>
-  <div class="flex flex-col grow">
-    <ul v-if="activities.length" class="divide-y grow">
+  <div class="flex grow flex-col">
+    <ul v-if="activities.length" class="grow divide-y">
       <ActivityItem
         v-for="activity in activities"
         :key="activity.id"
