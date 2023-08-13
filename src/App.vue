@@ -25,6 +25,7 @@ const deleteActivity = (activity) => {
   timelineItems.value.forEach((timelineItem) => {
     if (timelineItem.activityId === activity.id) {
       timelineItem.activityId = null;
+      timelineItem.activitySeconds = 0;
     }
   });
 
@@ -32,9 +33,9 @@ const deleteActivity = (activity) => {
 };
 
 const currentPage = ref(normalizePageHash());
-const timelineItems = ref(generateTimelineItems());
 const activities = ref(generateActivities());
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
+const timelineItems = ref(generateTimelineItems(activities.value));
 const setTimelineItemActivity = (timelineItem, activity) => {
   timelineItem.activityId = activity.id;
 };
