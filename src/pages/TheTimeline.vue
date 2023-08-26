@@ -5,12 +5,13 @@ import {
   validateActivities,
   isTimelineItemValid,
   isActivityValid,
+  isPageValid,
 } from '../validators/validators';
 import TimelineItem from '../components/TimelineItem.vue';
-import { onMounted, ref } from 'vue';
-import { MIDNIGHT_HOUR } from '../constants/constants';
+import { nextTick, ref, watchPostEffect } from 'vue';
+import { MIDNIGHT_HOUR, PAGE_TIMELINE } from '../constants/constants';
 
-defineProps({
+const props = defineProps({
   timelineItems: {
     required: true,
     type: Array,
@@ -25,6 +26,11 @@ defineProps({
     required: true,
     type: Array,
     validator: validateSelectOptions,
+  },
+  currentPage: {
+    required: true,
+    type: String,
+    validator: isPageValid,
   },
 });
 
@@ -50,7 +56,12 @@ const scrollToCurrentTimelineItem = () => {
   }
 };
 
-onMounted(scrollToCurrentTimelineItem);
+watchPostEffect(async () => {
+  if (props.currentPage === PAGE_TIMELINE) {
+    await nextTick();
+    scrollToCurrentTimelineItem();
+  }
+});
 </script>
 
 <template>
