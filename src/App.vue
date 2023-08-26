@@ -14,6 +14,14 @@ import {
 } from './utils/utils';
 
 const goTo = (page) => {
+  if (currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
+    timeline.value.scrollToHour();
+  }
+
+  if (page !== PAGE_TIMELINE) {
+    document.body.scrollIntoView();
+  }
+
   currentPage.value = page;
 };
 
@@ -32,6 +40,7 @@ const deleteActivity = (activity) => {
   activities.value.splice(activities.value.indexOf(activity), 1);
 };
 
+const timeline = ref();
 const currentPage = ref(normalizePageHash());
 const activities = ref(generateActivities());
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
@@ -54,6 +63,7 @@ const setActivitySecondsToComplete = (activity, secondsToComplete) => {
       :activities="activities"
       :activity-select-options="activitySelectOptions"
       :current-page="currentPage"
+      ref="timeline"
       @set-timeline-item-activity="setTimelineItemActivity"
     />
     <TheActivities

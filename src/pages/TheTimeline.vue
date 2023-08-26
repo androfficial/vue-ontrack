@@ -34,30 +34,33 @@ const props = defineProps({
   },
 });
 
+const scrollToHour = (hour = null, isSmooth = true) => {
+  hour ??= new Date().getHours();
+  const options = { behavior: isSmooth ? 'smooth' : 'instant' };
+
+  if (hour === MIDNIGHT_HOUR) {
+    document.body.scrollIntoView(options);
+  } else {
+    timelineItemRefs.value[hour - 1].$el.scrollIntoView(options);
+  }
+};
+
 const emit = defineEmits({
   setTimelineItemActivity(timelineItem, activity) {
     return [isTimelineItemValid(timelineItem), isActivityValid(activity)].every(Boolean);
   },
 });
 
-const timelineItemRefs = ref([]);
+defineExpose({
+  scrollToHour,
+});
 
-const scrollToHour = (hour) => {
-  if (hour === MIDNIGHT_HOUR) {
-    document.body.scrollIntoView({
-      behavior: 'smooth',
-    });
-  } else {
-    timelineItemRefs.value[hour - 1].$el.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }
-};
+const timelineItemRefs = ref([]);
 
 watchPostEffect(async () => {
   if (props.currentPage === PAGE_TIMELINE) {
     await nextTick();
-    scrollToHour(new Date().getHours());
+    scrollToHour(null, false);
   }
 });
 </script>
