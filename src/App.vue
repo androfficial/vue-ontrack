@@ -11,6 +11,7 @@ import {
   normalizePageHash,
   generateActivities,
   generateActivitySelectOptions,
+  generatePeriodSelectOptions,
 } from './utils/utils';
 
 const goTo = (page) => {
@@ -56,6 +57,7 @@ const setActivitySecondsToComplete = (activity, secondsToComplete) => {
 };
 
 provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds);
+provide('periodSelectOptions', generatePeriodSelectOptions());
 provide('activitySelectOptions', activitySelectOptions.value);
 provide('timelineItems', timelineItems.value);
 provide('activities', activities.value);
