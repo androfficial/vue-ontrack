@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, provide, ref } from 'vue';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './pages/TheTimeline.vue';
@@ -54,6 +54,8 @@ const updateTimelineItemActivitySeconds = (timelineItem, activitySeconds) => {
 const setActivitySecondsToComplete = (activity, secondsToComplete) => {
   activity.secondsToComplete = secondsToComplete;
 };
+
+provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds);
 </script>
 
 <template>
@@ -68,7 +70,6 @@ const setActivitySecondsToComplete = (activity, secondsToComplete) => {
       :current-page="currentPage"
       ref="timeline"
       @set-timeline-item-activity="setTimelineItemActivity"
-      @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds"
     />
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
