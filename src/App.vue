@@ -8,23 +8,11 @@ import TheProgress from './pages/TheProgress.vue';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants/constants';
 import {
   generateTimelineItems,
-  normalizePageHash,
   generateActivities,
   generateActivitySelectOptions,
   generatePeriodSelectOptions,
 } from './utils/utils';
-
-const goTo = (page) => {
-  if (currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
-    timeline.value.scrollToHour();
-  }
-
-  if (page !== PAGE_TIMELINE) {
-    document.body.scrollIntoView();
-  }
-
-  currentPage.value = page;
-};
+import { currentPage, timelineRef, navigate } from './router/router';
 
 const createActivity = (activity) => {
   activities.value.push(activity);
@@ -41,8 +29,6 @@ const deleteActivity = (activity) => {
   activities.value.splice(activities.value.indexOf(activity), 1);
 };
 
-const timeline = ref();
-const currentPage = ref(normalizePageHash());
 const activities = ref(generateActivities());
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 const timelineItems = ref(generateTimelineItems(activities.value));
@@ -70,18 +56,18 @@ provide('deleteActivity', deleteActivity);
 </script>
 
 <template>
-  <TheHeader @navigate="goTo($event)" />
+  <TheHeader @navigate="navigate" />
 
   <main class="flex flex-grow flex-col">
     <TheTimeline
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
       :current-page="currentPage"
-      ref="timeline"
+      ref="timelineRef"
     />
     <TheActivities v-show="currentPage === PAGE_ACTIVITIES" :activities="activities" />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
   </main>
 
-  <TheNav :current-page="currentPage" @navigate="goTo($event)" />
+  <TheNav :current-page="currentPage" @navigate="navigate" />
 </template>
