@@ -48,6 +48,9 @@ const timelineItems = ref(generateTimelineItems(activities.value));
 const setTimelineItemActivity = (timelineItem, activity) => {
   timelineItem.activityId = activity.id;
 };
+const updateTimelineItemActivitySeconds = (timelineItem, activitySeconds) => {
+  timelineItem.activitySeconds += activitySeconds;
+};
 const setActivitySecondsToComplete = (activity, secondsToComplete) => {
   activity.secondsToComplete = secondsToComplete;
 };
@@ -65,6 +68,7 @@ const setActivitySecondsToComplete = (activity, secondsToComplete) => {
       :current-page="currentPage"
       ref="timeline"
       @set-timeline-item-activity="setTimelineItemActivity"
+      @update-timeline-item-activity-seconds="updateTimelineItemActivitySeconds"
     />
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"

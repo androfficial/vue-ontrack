@@ -6,6 +6,7 @@ import {
   isTimelineItemValid,
   isActivityValid,
   isPageValid,
+  isNumber,
 } from '../validators/validators';
 import TimelineItem from '../components/TimelineItem.vue';
 import { nextTick, ref, watchPostEffect } from 'vue';
@@ -49,6 +50,9 @@ const emit = defineEmits({
   setTimelineItemActivity(timelineItem, activity) {
     return [isTimelineItemValid(timelineItem), isActivityValid(activity)].every(Boolean);
   },
+  updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
+    return [isTimelineItemValid(timelineItem), isNumber(activitySeconds)].every(Boolean);
+  },
 });
 
 defineExpose({
@@ -77,6 +81,7 @@ watchPostEffect(async () => {
         ref="timelineItemRefs"
         @scroll-to-hour="scrollToHour"
         @select-activity="emit('setTimelineItemActivity', timelineItem, $event)"
+        @update-activity-seconds="emit('updateTimelineItemActivitySeconds', timelineItem, $event)"
       />
     </ul>
   </div>
