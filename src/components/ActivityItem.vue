@@ -1,7 +1,7 @@
 <script setup>
 import { TrashIcon } from '@heroicons/vue/24/outline';
 import { BUTTON_TYPE_DANGER } from '../constants/constants';
-import { isActivityValid, isUndefined, isNumber } from '../validators/validators';
+import { isActivityValid, isUndefined } from '../validators/validators';
 import BaseButton from './BaseButton.vue';
 import BaseSelect from './BaseSelect.vue';
 import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue';
@@ -16,10 +16,10 @@ defineProps({
 });
 
 const emit = defineEmits({
-  setSecondsToComplete: isNumber,
   delete: isUndefined,
 });
 
+const setActivitySecondsToComplete = inject('setActivitySecondsToComplete');
 const periodSelectOptions = inject('periodSelectOptions');
 </script>
 
@@ -37,7 +37,7 @@ const periodSelectOptions = inject('periodSelectOptions');
         placeholder="hh:mm"
         :options="periodSelectOptions"
         :selected="activity.secondsToComplete || null"
-        @select="emit('setSecondsToComplete', $event || 0)"
+        @select="setActivitySecondsToComplete(activity, $event || 0)"
       />
       <ActivitySecondsToComplete v-if="activity.secondsToComplete" :activity="activity" />
     </div>

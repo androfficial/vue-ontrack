@@ -46,17 +46,21 @@ const currentPage = ref(normalizePageHash());
 const activities = ref(generateActivities());
 const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 const timelineItems = ref(generateTimelineItems(activities.value));
+
 const setTimelineItemActivity = (timelineItem, activityId) => {
   timelineItem.activityId = activityId;
 };
+
 const updateTimelineItemActivitySeconds = (timelineItem, activitySeconds) => {
   timelineItem.activitySeconds += activitySeconds;
 };
+
 const setActivitySecondsToComplete = (activity, secondsToComplete) => {
   activity.secondsToComplete = secondsToComplete;
 };
 
 provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds);
+provide('setActivitySecondsToComplete', setActivitySecondsToComplete);
 provide('periodSelectOptions', generatePeriodSelectOptions());
 provide('activitySelectOptions', activitySelectOptions.value);
 provide('setTimelineItemActivity', setTimelineItemActivity);
@@ -78,7 +82,6 @@ provide('timelineItems', timelineItems.value);
       :activities="activities"
       @create-activity="createActivity"
       @delete-activity="deleteActivity"
-      @set-activity-seconds-to-complete="setActivitySecondsToComplete"
     />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
   </main>
