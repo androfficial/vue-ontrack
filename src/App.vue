@@ -16,6 +16,7 @@ import {
   timelineItems,
   setTimelineItemActivity,
   updateTimelineItemActivitySeconds,
+  resetTimelineItemActivities,
 } from './modules/timelineItems';
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants/constants';
 import { generatePeriodSelectOptions } from './utils/utils';
@@ -29,7 +30,10 @@ provide(keys.activitySelectOptionsKey, readonly(activitySelectOptions));
 provide(keys.setTimelineItemActivityKey, setTimelineItemActivity);
 provide(keys.timelineItemsKey, readonly(timelineItems));
 provide(keys.createActivityKey, createActivity);
-provide(keys.deleteActivityKey, deleteActivity);
+provide(keys.deleteActivityKey, (activity) => {
+  resetTimelineItemActivities(activity);
+  deleteActivity(activity);
+});
 </script>
 
 <template>
