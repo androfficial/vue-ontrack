@@ -1,10 +1,10 @@
 <script setup>
 import { currentPage, navigate } from '../router/router';
 import { PAGE_TIMELINE } from '../constants/constants';
-import { scrollToHour } from '../modules/timelineItems';
+import { scrollToCurrentHour } from '../modules/timelineItems';
 
 function handleClick() {
-  currentPage.value === PAGE_TIMELINE ? scrollToHour() : navigate(PAGE_TIMELINE);
+  currentPage.value === PAGE_TIMELINE ? scrollToCurrentHour() : navigate(PAGE_TIMELINE);
 }
 </script>
 
