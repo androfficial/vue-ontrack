@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { normalizeSelectValue } from '../utils/utils';
 import { BUTTON_TYPE_NEUTRAL } from '../constants/constants';
+import { ICON_X_MARK } from '../constants/icons';
 import {
   validateSelectOptions,
   isUndefinedOrNull,
@@ -37,7 +38,7 @@ const select = (value) => {
 <template>
   <div class="flex gap-2">
     <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="select(null)">
-      <BaseIcon name="XMark" class="h-8" />
+      <BaseIcon :name="ICON_X_MARK" class="h-8" />
     </BaseButton>
     <select
       @change="select($event.target.value)"

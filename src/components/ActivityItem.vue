@@ -1,5 +1,6 @@
 <script setup>
 import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS } from '../constants/constants';
+import { ICON_TRASH } from '../constants/icons';
 import { isActivityValid } from '../validators/validators';
 import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue';
 import { deleteActivity, updateActivity } from '../modules/activities';
@@ -26,7 +27,7 @@ function deleteAndResetActivity(activity) {
   <li class="flex flex-col gap-2 p-4">
     <div class="flex items-center gap-2">
       <BaseButton :type="BUTTON_TYPE_DANGER" @click="deleteAndResetActivity(activity)">
-        <BaseIcon name="Trash" class="h-8" />
+        <BaseIcon :name="ICON_TRASH" class="h-8" />
       </BaseButton>
       <span class="truncate text-xl">{{ activity.name }}</span>
     </div>
