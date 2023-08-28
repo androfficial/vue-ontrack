@@ -2,6 +2,7 @@
 import { computed, inject } from 'vue';
 import { formatSeconds, getTotalActivitySeconds } from '../utils/utils';
 import { isActivityValid } from '../validators/validators';
+import { timelineItemsKey } from '../keys/keys';
 
 const props = defineProps({
   activity: {
@@ -11,7 +12,7 @@ const props = defineProps({
   },
 });
 
-const timelineItems = inject('timelineItems');
+const timelineItems = inject(timelineItemsKey);
 
 const classes = computed(
   () =>

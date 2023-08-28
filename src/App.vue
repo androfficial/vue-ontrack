@@ -1,5 +1,5 @@
 <script setup>
-import { computed, provide, ref } from 'vue';
+import { computed, provide, readonly, ref } from 'vue';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './pages/TheTimeline.vue';
@@ -13,6 +13,7 @@ import {
   generatePeriodSelectOptions,
 } from './utils/utils';
 import { currentPage, timelineRef } from './router/router';
+import * as keys from './keys/keys';
 
 const createActivity = (activity) => {
   activities.value.push(activity);
@@ -45,14 +46,14 @@ const setActivitySecondsToComplete = (activity, secondsToComplete) => {
   activity.secondsToComplete = secondsToComplete;
 };
 
-provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds);
-provide('setActivitySecondsToComplete', setActivitySecondsToComplete);
-provide('periodSelectOptions', generatePeriodSelectOptions());
-provide('activitySelectOptions', activitySelectOptions.value);
-provide('setTimelineItemActivity', setTimelineItemActivity);
-provide('timelineItems', timelineItems.value);
-provide('createActivity', createActivity);
-provide('deleteActivity', deleteActivity);
+provide(keys.updateTimelineItemActivitySecondsKey, updateTimelineItemActivitySeconds);
+provide(keys.setActivitySecondsToCompleteKey, setActivitySecondsToComplete);
+provide(keys.periodSelectOptionsKey, readonly(generatePeriodSelectOptions()));
+provide(keys.activitySelectOptionsKey, readonly(activitySelectOptions.value));
+provide(keys.setTimelineItemActivityKey, setTimelineItemActivity);
+provide(keys.timelineItemsKey, readonly(timelineItems.value));
+provide(keys.createActivityKey, createActivity);
+provide(keys.deleteActivityKey, deleteActivity);
 </script>
 
 <template>
