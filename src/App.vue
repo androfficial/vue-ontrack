@@ -6,14 +6,12 @@ import TheTimeline from './pages/TheTimeline.vue';
 import TheActivities from './pages/TheActivities.vue';
 import TheProgress from './pages/TheProgress.vue';
 import {
-  activities,
   activitySelectOptions,
   createActivity,
   deleteActivity,
   setActivitySecondsToComplete,
 } from './modules/activities';
 import {
-  timelineItems,
   setTimelineItemActivity,
   updateTimelineItemActivitySeconds,
   resetTimelineItemActivities,
@@ -28,7 +26,6 @@ provide(keys.setActivitySecondsToCompleteKey, setActivitySecondsToComplete);
 provide(keys.periodSelectOptionsKey, readonly(generatePeriodSelectOptions()));
 provide(keys.activitySelectOptionsKey, readonly(activitySelectOptions));
 provide(keys.setTimelineItemActivityKey, setTimelineItemActivity);
-provide(keys.timelineItemsKey, readonly(timelineItems));
 provide(keys.createActivityKey, createActivity);
 provide(keys.deleteActivityKey, (activity) => {
   resetTimelineItemActivities(activity);
@@ -40,12 +37,8 @@ provide(keys.deleteActivityKey, (activity) => {
   <TheHeader />
 
   <main class="flex flex-grow flex-col">
-    <TheTimeline
-      v-show="currentPage === PAGE_TIMELINE"
-      :timeline-items="timelineItems"
-      ref="timelineRef"
-    />
-    <TheActivities v-show="currentPage === PAGE_ACTIVITIES" :activities="activities" />
+    <TheTimeline v-show="currentPage === PAGE_TIMELINE" ref="timelineRef" />
+    <TheActivities v-show="currentPage === PAGE_ACTIVITIES" />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
   </main>
 
