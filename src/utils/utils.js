@@ -1,9 +1,4 @@
-import {
-  MILLISECONDS_IN_SECOND,
-  SECONDS_IN_HOUR,
-  SECONDS_IN_MINUTE,
-  MINUTES_IN_HOUR,
-} from '../constants/constants';
+import { MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, MINUTES_IN_HOUR } from '../constants/constants';
 import { isNull } from '../validators/validators';
 
 export function currentHour() {
@@ -20,14 +15,6 @@ export function formatSeconds(seconds) {
 
 export function normalizeSelectValue(value) {
   return isNull(value) || isNaN(value) ? value : +value;
-}
-
-export function generateActivities() {
-  return ['Coding', 'Training', 'Reading'].map((name, hours) => ({
-    id: id(),
-    name,
-    secondsToComplete: hours * SECONDS_IN_HOUR,
-  }));
 }
 
 export function id() {
