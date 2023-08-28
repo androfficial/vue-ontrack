@@ -38,7 +38,7 @@ const select = (value) => {
 <template>
   <div class="flex gap-2">
     <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="select(null)">
-      <BaseIcon :name="ICON_X_MARK" class="h-8" />
+      <BaseIcon :name="ICON_X_MARK" />
     </BaseButton>
     <select
       @change="select($event.target.value)"
