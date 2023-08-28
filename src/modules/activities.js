@@ -4,6 +4,10 @@ import { SECONDS_IN_HOUR } from '../constants/constants';
 
 export const activities = ref(generateActivities());
 
+export const trackedActivities = computed(() =>
+  activities.value.filter(({ secondsToComplete }) => secondsToComplete)
+);
+
 export const activitySelectOptions = computed(() =>
   generateActivitySelectOptions(activities.value)
 );
