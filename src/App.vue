@@ -43,7 +43,7 @@ const updateTimelineItemActivitySeconds = (timelineItem, activitySeconds) => {
 };
 
 const setActivitySecondsToComplete = (activity, secondsToComplete) => {
-  activity.secondsToComplete = secondsToComplete;
+  activity.secondsToComplete = secondsToComplete || 0;
 };
 
 provide(keys.updateTimelineItemActivitySecondsKey, updateTimelineItemActivitySeconds);

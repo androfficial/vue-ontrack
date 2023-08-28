@@ -1,9 +1,9 @@
 <script setup>
 import { inject } from 'vue';
-import { isHourValid, isTimelineItemValid } from '../validators/validators';
 import BaseSelect from './BaseSelect.vue';
 import TimelineHour from './TimelineHour.vue';
 import TimelineStopwatch from './TimelineStopwatch.vue';
+import { isTimelineItemValid, isUndefined } from '../validators/validators';
 import { activitySelectOptionsKey, setTimelineItemActivityKey } from '../keys/keys';
 
 defineProps({
@@ -15,7 +15,7 @@ defineProps({
 });
 
 const emit = defineEmits({
-  scrollToHour: isHourValid,
+  scrollToHour: isUndefined,
 });
 
 const setTimelineItemActivity = inject(setTimelineItemActivityKey);
@@ -24,10 +24,7 @@ const activitySelectOptions = inject(activitySelectOptionsKey);
 
 <template>
   <li class="relative flex flex-col gap-2 border-t border-gray-200 px-4 py-10">
-    <TimelineHour
-      :hour="timelineItem.hour"
-      @click.prevent="emit('scrollToHour', timelineItem.hour)"
-    />
+    <TimelineHour :hour="timelineItem.hour" @click.prevent="emit('scrollToHour')" />
     <BaseSelect
       placeholder="Rest"
       :selected="timelineItem.activityId"
