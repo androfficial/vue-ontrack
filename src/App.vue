@@ -30,9 +30,9 @@ const updateTimelineItemActivitySeconds = (timelineItem, activitySeconds) => {
 provide(keys.updateTimelineItemActivitySecondsKey, updateTimelineItemActivitySeconds);
 provide(keys.setActivitySecondsToCompleteKey, setActivitySecondsToComplete);
 provide(keys.periodSelectOptionsKey, readonly(generatePeriodSelectOptions()));
-provide(keys.activitySelectOptionsKey, readonly(activitySelectOptions.value));
+provide(keys.activitySelectOptionsKey, readonly(activitySelectOptions));
 provide(keys.setTimelineItemActivityKey, setTimelineItemActivity);
-provide(keys.timelineItemsKey, readonly(timelineItems.value));
+provide(keys.timelineItemsKey, readonly(timelineItems));
 provide(keys.createActivityKey, createActivity);
 provide(keys.deleteActivityKey, deleteActivity);
 </script>
