@@ -23,6 +23,7 @@ const props = defineProps({
 
 const seconds = ref(props.timelineItem.activitySeconds);
 const isRunning = ref(false);
+const temp = 120;
 
 const isStartButtonDisabled = props.timelineItem.hour !== currentHour();
 
@@ -31,30 +32,31 @@ watch(
   () => updateTimelineItem(props.timelineItem, { activitySeconds: seconds.value })
 );
 
-const start = () => {
+function start() {
   isRunning.value = setInterval(() => {
     updateTimelineItem(props.timelineItem, {
-      activitySeconds: props.timelineItem.activitySeconds + 1,
+      activitySeconds: props.timelineItem.activitySeconds + temp,
     });
+
     seconds.value++;
   }, MILLISECONDS_IN_SECOND);
-};
+}
 
-const stop = () => {
+function stop() {
   clearInterval(isRunning.value);
 
   isRunning.value = false;
-};
+}
 
-const reset = () => {
+function reset() {
   stop();
 
   updateTimelineItem(props.timelineItem, {
-    activitySeconds: props.timelineItem.activitySeconds - seconds.value,
+    activitySeconds: props.timelineItem.activitySeconds - seconds.value * temp,
   });
 
   seconds.value = 0;
-};
+}
 </script>
 
 <template>
