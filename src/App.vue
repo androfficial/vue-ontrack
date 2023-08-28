@@ -1,37 +1,22 @@
 <script setup>
-import { computed, provide, readonly, ref } from 'vue';
+import { provide, readonly, ref } from 'vue';
 import TheHeader from './components/TheHeader.vue';
 import TheNav from './components/TheNav.vue';
 import TheTimeline from './pages/TheTimeline.vue';
 import TheActivities from './pages/TheActivities.vue';
 import TheProgress from './pages/TheProgress.vue';
-import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants/constants';
 import {
-  generateTimelineItems,
-  generateActivities,
-  generateActivitySelectOptions,
-  generatePeriodSelectOptions,
-} from './utils/utils';
+  activities,
+  activitySelectOptions,
+  createActivity,
+  deleteActivity,
+  setActivitySecondsToComplete,
+} from './modules/activities';
+import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from './constants/constants';
+import { generateTimelineItems, generatePeriodSelectOptions } from './utils/utils';
 import { currentPage, timelineRef } from './router/router';
 import * as keys from './keys/keys';
 
-const createActivity = (activity) => {
-  activities.value.push(activity);
-};
-
-const deleteActivity = (activity) => {
-  timelineItems.value.forEach((timelineItem) => {
-    if (timelineItem.activityId === activity.id) {
-      timelineItem.activityId = null;
-      timelineItem.activitySeconds = 0;
-    }
-  });
-
-  activities.value.splice(activities.value.indexOf(activity), 1);
-};
-
-const activities = ref(generateActivities());
-const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value));
 const timelineItems = ref(generateTimelineItems(activities.value));
 
 const setTimelineItemActivity = (timelineItem, activityId) => {
@@ -40,10 +25,6 @@ const setTimelineItemActivity = (timelineItem, activityId) => {
 
 const updateTimelineItemActivitySeconds = (timelineItem, activitySeconds) => {
   timelineItem.activitySeconds += activitySeconds;
-};
-
-const setActivitySecondsToComplete = (activity, secondsToComplete) => {
-  activity.secondsToComplete = secondsToComplete || 0;
 };
 
 provide(keys.updateTimelineItemActivitySecondsKey, updateTimelineItemActivitySeconds);
