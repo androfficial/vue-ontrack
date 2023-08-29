@@ -28,11 +28,21 @@ export function calculateActivityCompletionPercentage({ secondsToComplete }, tra
   return Math.floor((trackedSeconds * HUNDRED_PERCENT) / secondsToComplete);
 }
 
+export function calculateCompletionPercentage(totalTrackedSeconds) {
+  return Math.floor((totalTrackedSeconds * HUNDRED_PERCENT) / totalActivitySecondsToComplete.value);
+}
+
+const totalActivitySecondsToComplete = computed(() => {
+  return trackedActivities.value
+    .map(({ secondsToComplete }) => secondsToComplete)
+    .reduce((total, seconds) => total + seconds, 0);
+});
+
 function generateActivities() {
-  return ['Coding', 'Training', 'Reading'].map((name, hours) => ({
+  return ['Coding', 'Reading', 'Training'].map((name, hours) => ({
     id: id(),
     name,
-    secondsToComplete: 15 * 60, // hours * SECONDS_IN_HOUR,
+    secondsToComplete: 15 * 60, // hours * SECONDS_IN_HOUR
   }));
 }
 
