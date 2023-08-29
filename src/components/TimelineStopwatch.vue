@@ -7,9 +7,11 @@ import {
 } from '../constants/constants';
 import { ICON_ARROW_PATH, ICON_PAUSE, ICON_PLAY } from '../constants/icons';
 import { isTimelineItemValid } from '../validators/validators';
+import { updateTimelineItem } from '../modules/timelineItems';
 import BaseButton from './BaseButton.vue';
 import { currentHour, formatSeconds } from '../utils/utils';
 import { useStopwatch } from '../composables/stopwatch';
+import { watch } from 'vue';
 
 const props = defineProps({
   timelineItem: {
@@ -18,7 +20,19 @@ const props = defineProps({
     validator: isTimelineItemValid,
   },
 });
-const { seconds, isRunning, start, stop, reset } = useStopwatch(props.timelineItem);
+
+const { seconds, isRunning, start, stop, reset } = useStopwatch(
+  props.timelineItem.activitySeconds,
+  updateTimelineItemActivitySeconds
+);
+
+watch(() => props.timelineItem.activityId, updateTimelineItemActivitySeconds);
+
+function updateTimelineItemActivitySeconds() {
+  updateTimelineItem(props.timelineItem, {
+    activitySeconds: seconds.value,
+  });
+}
 </script>
 
 <template>
