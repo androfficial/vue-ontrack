@@ -1,4 +1,5 @@
 <script>
+import { isButtonTypeValid } from '../validators/validators';
 import {
   BUTTON_TYPE_PRIMARY,
   BUTTON_TYPE_SUCCESS,
@@ -17,8 +18,6 @@ const typeClasses = {
 </script>
 
 <script setup>
-import { isButtonTypeValid } from '../validators/validators';
-
 const props = defineProps({
   type: {
     default: BUTTON_TYPE_PRIMARY,
@@ -27,13 +26,14 @@ const props = defineProps({
   },
 });
 
-const classes = `${
-  typeClasses[props.type]
-} rounded p-3 disabled:cursor-not-allowed disabled:opacity-50`;
+const classes = [
+  'rounded p-3 disabled:cursor-not-allowed disabled:opacity-50',
+  typeClasses[props.type],
+];
 </script>
 
 <template>
   <button :class="classes">
-    <slot></slot>
+    <slot />
   </button>
 </template>
